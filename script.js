@@ -20,8 +20,9 @@ const game = (function() {
         });
     };
 
-    const resetGrid = () => {
+    const resetGrid = (gridDom) => {
         grid.forEach(row => row.fill(-1));
+        Array.from(gridDom.children).forEach(e => e.textContent = "");
     };
 
     const getIndex = (index) => {
@@ -48,19 +49,20 @@ const game = (function() {
 
         if (grid[i][j] === -1) {
             grid[i][j] = currMove;
-            currMove = currMove === 0 ? 1 : 0;
             let charMove = currMove === 0 ? "O" : "X";
+            currMove = currMove === 0 ? 1 : 0;
             turnIndicator.textContent = `Player ${charMove}'s turn`;
+            cell.textContent = charMove;
             res = evaluate();
         }
 
         printGrid();
 
         if (res === 0) {
-            stopGame(0);
+            stopGame("O", turnIndicator);
         } else if (res === 1) {
-            stopGame(1);
-        } else { // -2
+            stopGame("X", turnIndicator);
+        } else if (res === -2) {
             alert("Invalid Move");
         }
     };
@@ -93,22 +95,19 @@ const game = (function() {
         return -1;
     };
 
-    const startGame = (turnIndicator) => {
+    const startGame = (turnIndicator, gridDom) => {
         gameOver = false;
-        resetGrid;
+        resetGrid(gridDom);
         turnIndicator.textContent = "Player X's turn";
     };
 
-    const stopGame = (player) => {
+    const stopGame = (player, turnIndicator) => {
         gameOver = true;
-        console.log(`${player} won!!`);
-        // TODO: Remove event listeners for grid cells
+        turnIndicator.textContent = `Player ${player} won 🎉`;
     };
     
     // export/return object with public methods
     return {
-        printGrid,
-        resetGrid,
         play,
         startGame
     };
@@ -124,9 +123,12 @@ function main() {
 
     gridDom.addEventListener("click", (e) => {
         // alert(e.target.textContent);
-        grid.play(e.target, gridDom, turnIndicator);
+        game.play(e.target, gridDom, turnIndicator);
     });
-    game.startGame(turnIndicator);
+    game.startGame(turnIndicator, gridDom);
+    restartButton.addEventListener("click", () => {
+        game.startGame(turnIndicator, gridDom);
+    });
 
 
 }

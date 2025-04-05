@@ -81,3 +81,7 @@ main button {
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
 }
+
+main button:active {
+    transform: scale(0.99);
+}
