@@ -5,9 +5,28 @@
  * -1 -> empty
  */
 
+const gameBoard = (function() {
+    const grid = Array(3).fill().map(() => Array(3).fill(-1));
+
+    const print = () => grid.forEach(row => console.log(row.join(" ")));
+    const reset = () => grid.forEach(row => row.fill(-1));
+    const getCell = (i, j) => grid[i][j];
+    const setCell = (i, j, value) => {
+        if (grid[i][j] === -1)
+            grid[i][j] = value;
+    };
+    const isFull = () => grid.forEach(row => row.every((cell) => cell !== -1));
+
+    return { print, reset, getCell, setCell, isFull };
+})();
+
+const displayController = (function() {
+
+})();
+
 const game = (function() {
     // initialize grid with -1
-    const grid = Array(3).fill().map(() => Array(3).fill(-1));
+    
     let gameOver = true;
     let currMove = 1; // current turn 1 or 0
 
