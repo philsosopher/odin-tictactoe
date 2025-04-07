@@ -103,7 +103,7 @@ const Game = (function() {
         // update score dom
         DisplayController.updateScore(players);
         // update turn indicator message to Player[won] won
-        DisplayController.updateMessage(`${players[won].name} won!!`);
+        DisplayController.updateMessage(`${players[won].name} won 🎉!!`);
     }
     const play = (index) => {
         if(matchOver) return;
