@@ -70,8 +70,9 @@ main {
 
 main .turn {
     height: 100px;
-    width: 400px;
+    width: auto;
     background-color: var(--turn-indicator-bg-color);
+    /* background-color: beige; */
     color: var(--turn-indicator-text-color);
     font-size: 3rem;
 
@@ -103,6 +104,13 @@ main .grid {
     color: var(--xo-symbol-color);
 }
 
+main .buttons {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 40px
+
+}
+
 main button {
     padding: 15px 50px;
     border: none;
@@ -115,3 +123,109 @@ main button {
 main button:active {
     transform: scale(0.99);
 }
+
+
+.player-names form {
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
+    padding: 20px;
+    font-family: 'lato';
+
+    display: grid;
+    justify-content: center;
+    gap:20px
+}
+
+form .heading {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+form .player1,
+form .player2 {
+    display: grid;
+    gap:5px
+
+}
+
+form input {
+    --input-height: 45px;
+    outline: none;
+    border:none;
+    color: var(--header-bg-color);
+    border-radius: calc(var(--input-height) / 2);
+    height: var(--input-height);
+    font-size: 1.2rem;
+    padding: 5px 20px;
+}
+
+form label {
+    margin-left: 10px;
+}
+
+form .start-button {
+    justify-self: center;
+    padding: 8px 50px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    background-color:rgb(255, 232, 236);
+    color: var(--header-bg-color);
+}
+
+
+
+
+form button.close {
+    border: none;
+    padding: 0;
+    height: auto;
+
+    /* outline: 2px solid red; */
+    background-color: transparent;
+    color: var(--header-color);
+    font-size: 3rem;
+    font-weight: bold;
+    transform: rotate(45deg) scale(0.7);
+
+    position: absolute;
+    top: -20px;
+    right: 0;
+}
+
+form button.close:active {
+    transform: rotate(45deg) scale(0.65);
+}
+
+
+/* Dialog */
+
+::backdrop {
+    background-image: linear-gradient(
+      45deg,
+      magenta,
+      rebeccapurple,
+      dodgerblue,
+      green
+    );
+    opacity: 0.15;
+  }
+  
+
+  dialog {
+    /* Remove default browser styling */
+    border: none;
+    border-radius: 7px;
+    padding: 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    
+    /* Control width (don't set height to maintain content proportions) */
+    width: 100%;
+    max-width: 400px;
+    
+    /* Position control if needed */
+    margin: auto;
+
+    overflow-x: hidden;
+  }
+  
