@@ -158,7 +158,8 @@ const Game = (function() {
 function main() {
     // dom elements
     const dialogBox = document.querySelector(".player-names");
-    const dialogSubmitButton = document.querySelector("form .start-button");
+    const dialogForm = document.querySelector(".player-names form");
+    const dialogCloseButton = document.querySelector("form .close");
     const gridDom = document.querySelector("main .grid");
     const restartGameButton = document.querySelector("main .restart-game");
     const restartMatchButton = document.querySelector("main .restart-match");
@@ -171,7 +172,7 @@ function main() {
         Game.play(index);
     });
     restartGameButton.addEventListener("click", () => dialogBox.showModal());
-    dialogSubmitButton.addEventListener("click", (event) => {
+    dialogForm.addEventListener("submit", (event) => {
         event.preventDefault(); // prevent default action of form sending data to server
 
         restartMatchButton.addEventListener("click", () => Game.startMatch());
@@ -185,6 +186,10 @@ function main() {
         event.target.reset();
 
         // close dialog
+        dialogBox.close();
+    });
+    dialogCloseButton.addEventListener("click", () => {
+        dialogForm.reset();
         dialogBox.close();
     });
 }
